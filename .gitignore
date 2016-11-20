@@ -1,0 +1,4 @@
+# land.nicerun git ignore settings
+/build
+.gradle/
+.asscache
