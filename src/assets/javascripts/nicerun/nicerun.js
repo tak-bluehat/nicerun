@@ -4,14 +4,14 @@ Author: Takashi Tsuruta
 Date: 2015-11-26
 */
 
-var niceRunApp = angular.module('niceRunApp',
+var nicerunApp = angular.module('nicerunApp',
     [
       'pascalprecht.translate'
     ]
 );
 
 // angular-translate settings
-niceRunApp.config(['$translateProvider', function($translateProvider) {
+nicerunApp.config(['$translateProvider', function($translateProvider) {
 
     $translateProvider.useStaticFilesLoader({
         prefix: 'locale-',

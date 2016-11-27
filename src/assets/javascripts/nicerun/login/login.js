@@ -25,5 +25,5 @@ Date: 2016-11-26
              templateUrl: '/assets/login-service.html'
         };
     };
-    angular.module('niceRunApp').directive('nicerunLoginService', directive);
+    angular.module('nicerunApp').directive('nicerunLoginService', directive);
 }
