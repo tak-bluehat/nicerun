@@ -55,6 +55,7 @@ sourceSets {
 task locale {
     File file = new File("src/assets/locale")
     String outputDir = "src/main/resources/static/"
+    String fileNamePrefix = "locale-"
     Yaml yaml = new Yaml()
     List<String> supportLocales = ["ja", "en"]
     
@@ -75,7 +76,7 @@ task locale {
     supportLocales.forEach{ locale ->
         try {
             Map map = walkDir(file, locale)
-            File output = new File(outputDir + locale + ".json")
+            File output = new File(outputDir + fileNamePrefix + locale + ".json")
             FileWriter fileWriter = new FileWriter(output)
             fileWriter.write((new JSONObject(map)).toString())
             println((new JSONObject(map)).toString());
