@@ -1,3 +1,6 @@
+import org.json.JSONObject;
+import org.yaml.snakeyaml.Yaml;
+
 buildscript {
     repositories {
         jcenter()
@@ -6,7 +9,9 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
         classpath("com.bertramlabs.plugins:asset-pipeline-gradle:2.6.7")
-    }
+        classpath("org.json:json:20160810")
+        classpath("org.yaml:snakeyaml:1.17") 
+   }
 }
 
 apply plugin: 'java'
@@ -24,6 +29,7 @@ dependencies {
     compile("com.bertramlabs.plugins:asset-pipeline-spring-boot:2.6.7")
     compile("org.codehaus.groovy:groovy:2.4.7")
     compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.json:json:20160810")
 }
 
 bootRepackage {
@@ -46,3 +52,39 @@ sourceSets {
     }
 }
 
+task locale {
+    File file = new File("src/assets/locale")
+    String outputDir = "src/main/resources/static/"
+    Yaml yaml = new Yaml()
+    List<String> supportLocales = ["ja", "en"]
+    
+    Closure<Map> walkDir
+    walkDir = { File dir, String localeStr ->
+        Map map = new HashMap()
+        List<File> dirList = dir.listFiles()
+        dirList.forEach{ path ->
+            if(path.getName().equals(localeStr + ".yml")) {
+                map = yaml.loadAs((new FileInputStream(path)), Map.class)
+            } else if(path.isDirectory()) {
+                map.put(path.getName(), walkDir(path, localeStr))
+            }
+        }
+        return map
+    }
+
+    supportLocales.forEach{ locale ->
+        try {
+            Map map = walkDir(file, locale)
+            File output = new File(outputDir + locale + ".json")
+            FileWriter fileWriter = new FileWriter(output)
+            fileWriter.write((new JSONObject(map)).toString())
+            println((new JSONObject(map)).toString());
+            fileWriter.flush()
+            fileWriter.close()
+        } catch(Exception e) {
+            println(e)
+        }
+    };
+
+
+}
