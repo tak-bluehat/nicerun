@@ -1,1 +1,1 @@
-{"login":{"password":"Password","title_phrase":"Let's record your running","mail_address":"Mail Address","login":"Login","signup":"Signup","locale_setting":"Locale Setting"}}
+{"login":{"password":"Password","title_phrase":"Let's record your running","access_denied":"Login incorrect","server_error":"Server Error - Please contact site administrator","input_error":"Please input mail address and password","mail_address":"Mail Address","login":"Login","signup":"Signup","locale_setting":"Locale Setting"}}
