@@ -6,6 +6,7 @@ Date: 2015-11-26
 
 var nicerunApp = angular.module('nicerunApp',
     [
+      'ngResource',
       'pascalprecht.translate'
     ]
 );

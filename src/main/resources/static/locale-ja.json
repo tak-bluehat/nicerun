@@ -1,1 +1,1 @@
-{"login":{"password":"パスワード","title_phrase":"ランニングを記録しよう!","mail_address":"メールアドレス","login":"ログイン","signup":"サインアップ","locale_setting":"言語設定"}}
+{"login":{"password":"パスワード","title_phrase":"ランニングを記録しよう!","access_denied":"メールアドレスかパスワードが間違っています","server_error":"サーバエラーです。サイト管理者に問い合せて下さい","input_error":"メールアドレスとパスワードを入力して下さい","mail_address":"メールアドレス","login":"ログイン","signup":"サインアップ","locale_setting":"言語設定"}}

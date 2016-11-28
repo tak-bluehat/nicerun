@@ -5,6 +5,7 @@
     <h5 translate="login.title_phrase"></h5>
     </div>
     <div class="nicerun-login-form">
+      <p class="nicerun-error" ng-if="loginCtrl.errorMessage != ''" translate="login.{{loginCtrl.errorMessage}}"></p>
       <div class="form-group">
         <label for="loginID" translate="login.locale_setting"></label>
         <select ng-model="loginCtrl.locale" ng-change="loginCtrl.changeLocale()" class="form-control">
@@ -14,13 +15,13 @@
       </div>
       <div class="form-group">
         <label for="loginID" translate="login.mail_address"></label>
-        <input type="text" class="form-control">
+        <input type="text" ng-model="loginCtrl.mailAddress" class="form-control">
       </div>
       <div class="form-group">
         <label for="password" translate="login.password"></label>
-        <input type="password" class="form-control">
+        <input type="password" ng-model="loginCtrl.password" class="form-control">
       </div>
-      <button type="submit" class="btn btn-default" translate="login.login"></button>
+      <button type="submit" class="btn btn-default" ng-click="loginCtrl.authentication()" translate="login.login"></button>
     </div>
   </div>
 </div>

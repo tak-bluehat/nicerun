@@ -1,0 +1,10 @@
+/*
+* error.css
+* Author: Takashi Tsuruta
+* Date: 2016-11-27
+*/
+
+.nicerun-error {
+    padding: 5px;
+    color: red;
+}
