@@ -1,0 +1,54 @@
+
+import org.json.JSONObject;
+import org.yaml.snakeyaml.Yaml;
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath("org.json:json:20160810")
+        classpath("org.yaml:snakeyaml:1.17") 
+   }
+}
+
+task locale {
+
+    
+    File file = new File("src/assets/locale")
+    String outputDir = "src/main/resources/static/"
+    String fileNamePrefix = "locale-"
+    Yaml yaml = new Yaml()
+    List<String> supportLocales = ["ja", "en"]
+    
+    Closure<Map> walkDir
+    walkDir = { File dir, String localeStr ->
+        Map map = new HashMap()
+        List<File> dirList = dir.listFiles()
+        dirList.forEach{ path ->
+            if(path.getName().equals(localeStr + ".yml")) {
+                map = yaml.loadAs((new FileInputStream(path)), Map.class)
+            } else if(path.isDirectory()) {
+                map.put(path.getName(), walkDir(path, localeStr))
+            }
+        }
+        return map
+    }
+
+    supportLocales.forEach{ locale ->
+        try {
+            Map map = walkDir(file, locale)
+            File output = new File(outputDir + fileNamePrefix + locale + ".json")
+            FileWriter fileWriter = new FileWriter(output)
+            fileWriter.write((new JSONObject(map)).toString())
+            println((new JSONObject(map)).toString());
+            fileWriter.flush()
+            fileWriter.close()
+        } catch(Exception e) {
+            println(e)
+        }
+    };
+
+
+}
